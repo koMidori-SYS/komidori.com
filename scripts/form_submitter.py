@@ -389,13 +389,13 @@ def map_fields(
         elif f.category == FieldCategory.EMAIL:
             data[f.name] = sender.email
         elif f.category == FieldCategory.PHONE:
-            data[f.name] = sender.phone or "03-0000-0000"
+            data[f.name] = sender.phone or ""
         elif f.category == FieldCategory.SUBJECT:
             data[f.name] = subject
         elif f.category == FieldCategory.MESSAGE:
             data[f.name] = body
         elif f.category == FieldCategory.FURIGANA:
-            data[f.name] = sender.furigana or "エーアイケイエイオーエス"
+            data[f.name] = sender.furigana or ""
         elif f.category == FieldCategory.DEPARTMENT:
             data[f.name] = sender.department or ""
         elif f.category == FieldCategory.POSITION:

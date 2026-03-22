@@ -50,9 +50,9 @@ def search(
     exclude_domains = exclude_domains or set()
 
     try:
-        # 部分一致で検索
-        params: list = [f"%{industry}%"]
-        where = "c.isDeleted = 0 AND i.name LIKE ?"
+        # 完全一致で検索（「飲食店」で「飲食料品卸売業」が混ざらないように）
+        params: list = [industry]
+        where = "c.isDeleted = 0 AND i.name = ?"
         if prefecture:
             where += " AND p.name LIKE ?"
             params.append(f"%{prefecture}%")

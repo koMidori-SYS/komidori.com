@@ -70,9 +70,11 @@ def run_batch(industry: str | None = None, n: int = 10, csv_only: bool = False):
     from scripts.form_submitter import submit_form, SenderInfo
 
     sender = SenderInfo(
-        name="komidori",
-        company="komidori",
+        name="千葉 実佑",
+        company="koMidori",
         email="info@komidori.com",
+        phone="",
+        furigana="チバ ミユ",
     )
 
     processed = 0

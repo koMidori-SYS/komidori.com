@@ -22,6 +22,6 @@ koMidori
 info@komidori.com"""
 
 
-def generate(**_kwargs) -> dict:
+def generate(*_args, **_kwargs) -> dict:
     """固定の営業文を返す"""
     return {"subject": SUBJECT, "body": BODY}

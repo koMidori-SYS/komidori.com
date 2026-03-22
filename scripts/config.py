@@ -11,5 +11,8 @@ GMAIL_APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD", "")
 SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL", "")
 DRY_RUN = os.getenv("DRY_RUN", "true").lower() == "true"
 
-DB_PATH = Path(__file__).resolve().parent.parent / "data" / "toiawasekun.db"
+# ネットワークドライブだと遅いので /tmp にコピーがあればそちらを優先
+_LOCAL_DB = Path("/tmp/toiawasekun.db")
+_NETWORK_DB = Path(__file__).resolve().parent.parent / "data" / "toiawasekun.db"
+DB_PATH = _LOCAL_DB if _LOCAL_DB.is_file() else _NETWORK_DB
 PROMPT_PATH = Path(__file__).resolve().parent.parent / "templates" / "outreach_prompt.txt"

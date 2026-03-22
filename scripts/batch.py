@@ -101,23 +101,19 @@ def run_batch(industry: str | None = None, n: int = 10, csv_only: bool = False):
         lead["outreach_subject"] = subject
         lead["outreach_body"] = body
 
-        if DRY_RUN:
-            print(f"  [DRY_RUN] Would submit to: {form_url}")
-            lead["status"] = "DRY_RUN"
-            processed += 1
-            continue
-
-        # フォームURL があればフォーム送信
+        # フォームURL があればフォーム送信（DRY_RUNでもフィールド確認）
         if form_url:
             result = submit_form(
                 contact_url=form_url,
                 sender=sender,
                 subject=subject,
                 body=body,
+                dry_run=DRY_RUN,
             )
             if result.get("success"):
-                lead["status"] = "FORM_SENT"
-                print(f"  FORM_SENT: {form_url}")
+                status = "DRY_RUN" if DRY_RUN else "FORM_SENT"
+                lead["status"] = status
+                print(f"  {status}: {form_url}")
             else:
                 lead["status"] = "FORM_FAILED"
                 print(f"  FORM_FAILED: {result.get('reason', 'unknown')}")

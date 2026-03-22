@@ -491,6 +491,11 @@ def submit_form(
         "フォーム送信準備: %s | fields=%d | action=%s",
         contact_url, len(data), form.action,
     )
+    # マッピング内容をログ出力（送信内容の確認用）
+    for field_name, field_value in data.items():
+        if field_name not in form.hidden_fields:
+            preview = field_value[:80] + "..." if len(field_value) > 80 else field_value
+            logger.info("  [FIELD] %s = %s", field_name, preview)
 
     if dry_run:
         result["success"] = True
